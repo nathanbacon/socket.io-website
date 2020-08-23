@@ -24,7 +24,7 @@ io.emit('hi', 'all sockets');
 
 Chances are that some of those clients might have an active bi-directional communication channel like `WebSocket` that we can write to immediately, but some of them might be using long-polling.
 
-If they&#8217;re using long polling, they might or might not have sent a request that we can write to. They could be &#8220;in between&#8221; those requests. In those situations, it means we have to buffer messages in the process. In order for the client to successfully claim those messages when he sends his request, the easiest way is for him to connect to be routed to that same process.
+If they&#8217;re using long polling, they might or might not have sent a request that we can write to. They could be &#8220;in between&#8221; those requests. In those situations, it means we have to buffer messages in the process. In order for the client to successfully claim those messages when they send their request, the easiest way is for them to connect to be routed to that same process.
 
 As noted above, `WebSocket` transport do not have this limitation, since the underlying TCP connection is kept open between the client and the given server. That's why you might find some suggestions to only use the `WebSocket` transport:
 
@@ -35,7 +35,7 @@ const client = io('https://io.yourhost.com', {
 })
 ```
 
-Both means that there is **NO FALLBACK** to long-polling when the websocket connection cannot be established, which is in fact one of the key feature of Socket.IO. In that case, you should maybe consider using raw [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket), or a thin wrapper like [robust-websocket](https://github.com/appuri/robust-websocket).
+Both means that there is **NO FALLBACK** to long-polling when the websocket connection cannot be established, which is in fact one of the key features of Socket.IO. In that case, you should maybe consider using raw [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket), or a thin wrapper like [robust-websocket](https://github.com/appuri/robust-websocket).
 
 To achieve sticky-session, there are two main solutions:
 
